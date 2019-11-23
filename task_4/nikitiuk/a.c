@@ -20,9 +20,10 @@ typedef struct args { // Information about each threads interval for integration
     double minY;      // Minimum value of integrand
     double maxY;      // Maximum value of integrand
     int dots;         // Number of throws for the thread
+    int id;
 } interval;
 
-double integral = 0; // Value of integral
+double integral[16384]; // Value of integral
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -67,11 +68,11 @@ void* thread_routine(void* args)
             hits--;
     }
 
-    double delta = (lmao.maxY-lmao.minY) * lmao.lengthX * hits / lmao.dots;
-    pthread_mutex_lock(&mutex);                              // Add number of hits to total integral
+    integral[lmao.id]= (lmao.maxY-lmao.minY) * lmao.lengthX * hits / lmao.dots;
+    /*pthread_mutex_lock(&mutex);                              // Add number of hits to total integral
     integral += delta; // Each throw coresponds to some area around it
     pthread_mutex_unlock(&mutex); // Done in critical section because integral is shared between threads
-
+*/
     pthread_exit(NULL);
 }
 
@@ -102,6 +103,7 @@ int main(int argc, char const *argv[])
         a[i].minY = -STARTX - (i + 1) * length_per_thread;
         a[i].maxY = STARTX + (i + 1) * length_per_thread;
         a[i].dots = dots_per_thread;
+        a[i].id = i;
     }
 
     long long time_start = get_time(); // Get starting time
@@ -116,8 +118,13 @@ int main(int argc, char const *argv[])
 
     long long execution_time = (time_end - time_start); // Get time it took to compute integral
 
-    printf("Integration result: %f\n", integral);
-    printf("Correct result 1.29759\n"); // From WolframAlpha
+    double result = 0;
+    for (size_t i = 0; i < THREADS_COUNT; i++) {
+      result+=integral[i];
+    }
+
+    printf("Integration result: %f\n", result);
+    printf("Correct result: 1.29759\n"); // From WolframAlpha
     printf("Computation took: %lld\n", execution_time);
 
     FILE* log = fopen("data.log", "a");
