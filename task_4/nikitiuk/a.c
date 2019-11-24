@@ -28,7 +28,7 @@ double integral[16384]; // Value of integral
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 // drand48 used cause it returns value from 0 to 1 and is supposedly more random
-struct drand48_data drand_buf;
+struct drand48_data drand_buf[16384];
 
 double integrand(double x) { return x * sin(1 / x); } // Integrand function
 
@@ -57,8 +57,8 @@ void* thread_routine(void* args)
 
     for (int i = 0; i < lmao.dots; i++) // For each throw
     {
-        drand48_r(&drand_buf, &dotX);                      // Randomise distance from interval's start
-        drand48_r(&drand_buf, &dotY);                      // Randomise value
+        drand48_r(&drand_buf[lmao.id], &dotX);                      // Randomise distance from interval's start
+        drand48_r(&drand_buf[lmao.id], &dotY);                      // Randomise value
         dotX = lmao.startX + dotX * lmao.lengthX;          // Get throw's X coordinate
         dotY = lmao.minY + dotY * (lmao.maxY - lmao.minY); // Get throw's Y coordinate
 
@@ -85,7 +85,10 @@ int main(int argc, char const *argv[])
 
     printf("%d\n", THREADS_COUNT);
 
-    srand48_r(get_time(), &drand_buf); // Initialize random
+    for (size_t i = 0; i < 16384; i++) {
+      srand48_r(get_time(), &drand_buf[i]); // Initialize random
+    }
+
 
     pthread_t thread[THREADS_COUNT];
     int dots_per_thread = DOTS / THREADS_COUNT;
