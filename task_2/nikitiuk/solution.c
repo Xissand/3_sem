@@ -1,98 +1,98 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
+#include <unistd.h>
 
 typedef struct {
-	int txd[2];		//Transmission from parent to child
-	int rxd[2]; 	//Transmission from child to parent
-} dpipe_t; 			//Duplex pipe
-
+    int txd[2]; // Transmission from parent to child
+    int rxd[2]; // Transmission from child to parent
+} dpipe_t;      // Duplex pipe
 
 int main()
 {
-	dpipe_t dpipe;
-	char buf[4096];
-	int size;
+    dpipe_t dpipe;
+    char buf[65536];
+    int size;
 
-	if ((pipe(dpipe.txd) < 0) | (pipe(dpipe.rxd) < 0))	//Initialize pipes
-	{
-		puts("Pipe creation failed");
-		return 42;
-	}
+    if ((pipe(dpipe.txd) < 0) | (pipe(dpipe.rxd) < 0)) // Initialize pipes
+    {
+        puts("Pipe creation failed");
+        return 42;
+    }
 
-	const pid_t pid = fork();	//Create child
+    const pid_t pid = fork(); // Create child
 
-	if (pid < 0)
-	{
-		puts("Fork failed");
-		return 42;
-	}
+    if (pid < 0)
+    {
+        puts("Fork failed");
+        return 42;
+    }
 
-	while (1)
-	{
-		if (pid) //Process is a parent
-		{
-			close(dpipe.txd[0]); //Close p->ch exit
-			close(dpipe.rxd[1]); //Close ch->p entrance
+    while (1)
+    {
+        if (pid) // Process is a parent
+        {
+            close(dpipe.txd[0]); // Close p->ch exit
+            close(dpipe.rxd[1]); // Close ch->p entrance
 
-			size = read(0, buf, sizeof(buf) - 1); //Transmit data to child
-			buf[size] = '\0'; // the text string data is expected
-			write(dpipe.txd[1], buf, size);
-			printf("Parent:	Sent to child: %s", buf);
+            /*Buffer size of read is the size of a pipe buffer. Hence any message that gets read will fit into the pipe,
+            so everything we write is guaranteed to be transmitted. If user inputs more then 16 pages into "0" file
+            descriptor, after writing the buffer read will simply continue to read user's input with new input being
+            appended at the end. Therefore i/o doesn't need to be wrapped in loop.*/
 
-			if (strcmp(buf, "exit\n") == 0)	//Exit on exit message (input as always ends with new line)
-			{
-				puts("Parent terminated by user");
-				return 0;
-			}
+            size = read(0, buf, sizeof(buf) - 1); // Get data from user
+            buf[size] = '\0';                     // Format to standart string
+            write(dpipe.txd[1], buf, size);       // Transmit data to child
 
-			sleep(1); //Wait for child to process input
+            if (strcmp(buf, "exit\n") == 0) // Exit on exit message from user
+            {
+                puts("Parent terminated by user");
+                return 0;
+            }
 
-			size = read(dpipe.rxd[0], buf, sizeof(buf) - 1); //Read data from child
+            printf("Parent:	Sent to child: %s", buf);
 
-			buf[size] = '\0'; // the text string data is expected
-			printf("Parent:	Received from child: %s", buf);
+            size = read(dpipe.rxd[0], buf, sizeof(buf) - 1); // Read data from child
 
-			if (strcmp(buf, "exit\n") == 0) //Exit if child exited whithout fatal errors from write
-			{
-				puts("Parent terminated by child");
-				return 0;
-			}
+            buf[size] = '\0';
 
+            if (strcmp(buf, "exit\n") == 0) // Exit if child was terminated by user
+            {
+                puts("Parent terminated by child");
+                return 0;
+            }
 
-		}
-		else //Process is a child
-		{
-			close(dpipe.txd[1]); //Close p->ch exit
-			close(dpipe.rxd[0]); //Close ch->p entrance
+            printf("Parent:	Received from child: %s", buf);
+        }
+        else // Process is a child
+        {
+            close(dpipe.txd[1]); // Close p->ch exit
+            close(dpipe.rxd[0]); // Close ch->p entrance
 
-			size = read(dpipe.txd[0], buf, sizeof(buf) - 1); //Read data from parent
+            size = read(dpipe.txd[0], buf, sizeof(buf) - 1); // Read data from parent
 
-			buf[size] = '\0'; // the text string data is expected
-			printf("Child:	Received from parent: %s", buf);
+            buf[size] = '\0';
 
-			if (strcmp(buf, "exit\n") == 0)	//Exit if parent exited whithout fatal errors from write
-			{
-				puts("Child terminated by parent");
-				return 0;
-			}
+            if (strcmp(buf, "exit\n") == 0) // Exit if parent was terminated by user
+            {
+                puts("Child terminated by parent");
+                return 0;
+            }
 
-			sleep(1);
+            printf("Child:	Received from parent: %s", buf);
 
-			size = read(0, buf, sizeof(buf) - 1); //Transmit data to parent
+            size = read(0, buf, sizeof(buf) - 1); // Get data from user
+            buf[size] = '\0';                     // Format to standart string
+            write(dpipe.rxd[1], buf, size);       // Transmit data to parent
 
-			buf[size] = '\0'; // the text string data is expected
-			write(dpipe.rxd[1], buf, size);
-			printf("Child:	Sent to parent: %s", buf);
+            if (strcmp(buf, "exit\n") == 0) // Exit on exit message from user
+            {
+                puts("Child terminated by user");
+                return 0;
+            }
 
-			if (strcmp(buf, "exit\n") == 0)	//Exit on exit message (input as always ends with new line)
-			{
-				puts("Child terminated by user");
-				return 0;
-			}
-
-		}
-	}
-	return 0;
+            printf("Child:	Sent to parent: %s", buf);
+        }
+    }
+    return 0;
 }

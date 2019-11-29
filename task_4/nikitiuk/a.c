@@ -12,18 +12,18 @@ const int DOTS = 268435456; // Total number of throws
 
 const double STARTX = 0.0;
 const double ENDX = 2.0;
-//const double MAXY = 1.0;
+// const double MAXY = 1.0;
 
-typedef struct args { // Information about each threads interval for integration
-    double startX;    // Start of the interval
-    double lengthX;   // Length of interval
-    double minY;      // Minimum value of integrand
-    double maxY;      // Maximum value of integrand
-    int dots;         // Number of throws for the thread
+typedef struct {    // Information about each threads interval for integration
+    double startX;  // Start of the interval
+    double lengthX; // Length of interval
+    double minY;    // Minimum value of integrand
+    double maxY;    // Maximum value of integrand
+    int dots;       // Number of throws for the thread
     int id;
 } interval;
 
-double integral[16384]; // Value of integral
+volatile double integral[16384]; // Value of integral
 
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
@@ -51,14 +51,11 @@ void* thread_routine(void* args)
       Generate a random number x, uniformly distributed between Xmin and Xmax ,
       Generate a second independent random number u uniformly distributed between fmin and fmax
       If u < f(x), then accept x. If not, reject x and repeat. */
-    /*This is supported by comparison in deviation of results from analytical between 1 computatinal thread and 16384 threads.
-    Larger amount of threads allows for finer bounds for Y value, which allows to throw points closer to the
-    integran's curve increasing precision.*/
 
     for (int i = 0; i < lmao.dots; i++) // For each throw
     {
-        drand48_r(&drand_buf[lmao.id], &dotX);                      // Randomise distance from interval's start
-        drand48_r(&drand_buf[lmao.id], &dotY);                      // Randomise value
+        drand48_r(&drand_buf[lmao.id], &dotX);             // Randomise distance from interval's start
+        drand48_r(&drand_buf[lmao.id], &dotY);             // Randomise value
         dotX = lmao.startX + dotX * lmao.lengthX;          // Get throw's X coordinate
         dotY = lmao.minY + dotY * (lmao.maxY - lmao.minY); // Get throw's Y coordinate
 
@@ -68,35 +65,38 @@ void* thread_routine(void* args)
             hits--;
     }
 
-    integral[lmao.id]= (lmao.maxY-lmao.minY) * lmao.lengthX * hits / lmao.dots;
+    integral[lmao.id] = (lmao.maxY - lmao.minY) * lmao.lengthX * hits / lmao.dots;
     /*pthread_mutex_lock(&mutex);                              // Add number of hits to total integral
-    integral += delta; // Each throw coresponds to some area around it
+    integral += delta; // Each throw corresponds to some area around it
     pthread_mutex_unlock(&mutex); // Done in critical section because integral is shared between threads
-*/
+    */
     pthread_exit(NULL);
 }
 
-int main(int argc, char const *argv[])
+int main(int argc, char const* argv[])
 {
-    if(argc != 2)
-      printf("Assuming 1 thread\n");
+    if (argc != 2)
+        printf("Assuming 1 thread\n");
     else
-      sscanf(argv[1], "%d", &THREADS_COUNT);
+        sscanf(argv[1], "%d", &THREADS_COUNT);
 
     printf("%d\n", THREADS_COUNT);
 
-    for (size_t i = 0; i < 16384; i++) {
-      srand48_r(get_time(), &drand_buf[i]); // Initialize random
+    for (size_t i = 0; i < THREADS_COUNT; i++)
+    {
+        srand48_r(get_time(), &drand_buf[i]); // Initialize random
     }
-
 
     pthread_t thread[THREADS_COUNT];
     int dots_per_thread = DOTS / THREADS_COUNT;
     double length_per_thread = (ENDX - STARTX) / THREADS_COUNT;
 
-    //"генерируя в каждом из них N/n точек равномерно по интервалу" could be interpreted in a couple of ways:
-    // Each thread generates points in the entire interval or interval is split between threads
-    // I believe splitting the interval guarantees more evenly distributed points. However, I could be wrong
+    /*"генерируя в каждом из них N/n точек равномерно по интервалу" could be interpreted in a couple of ways:
+     Each thread generates points in the entire interval or interval is split between threads
+     I believe splitting the interval guarantees more evenly distributed points. However, I could be wrong */
+    /*This is supported by comparison in deviation of results from analytical between 1 computatinal thread and 512
+    threads. Larger amount of threads allows for finer bounds for Y value, which allows to throw points closer to the
+    integrand's curve increasing precision.*/
 
     interval a[THREADS_COUNT];
     for (int i = 0; i < THREADS_COUNT; i++) // Initialize each threads interval
@@ -122,8 +122,9 @@ int main(int argc, char const *argv[])
     long long execution_time = (time_end - time_start); // Get time it took to compute integral
 
     double result = 0;
-    for (size_t i = 0; i < THREADS_COUNT; i++) {
-      result+=integral[i];
+    for (size_t i = 0; i < THREADS_COUNT; i++)
+    {
+        result += integral[i];
     }
 
     printf("Integration result: %f\n", result);
