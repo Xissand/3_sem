@@ -1,0 +1,497 @@
+---------------------------------------------------------
+Daemon initiated in background mode
+Mon Dec  2 18:39:52 2019
+
+---------------------------------------------------------
+Mon Dec  2 18:39:52 2019
+
+directory: 3_sem/some stuff
+attempt to mkdir: ./backup/3_sem/some stuff 
+created directory: 3_sem/some stuff. File exists 
+
+file: 3_sem/some stuff/stuff
+file type: 3_sem/some stuff/stuff: ASCII text
+file checked: Files 3_sem/some stuff/stuff and backup/3_sem/some stuff/stuff are identical
+
+directory: 3_sem/task_4
+attempt to mkdir: ./backup/3_sem/task_4 
+created directory: 3_sem/task_4. File exists 
+
+file: 3_sem/task_4/task.txt
+file type: 3_sem/task_4/task.txt: UTF-8 Unicode text
+file checked: Files 3_sem/task_4/task.txt and backup/3_sem/task_4/task.txt are identical
+
+directory: 3_sem/task_4/examples
+attempt to mkdir: ./backup/3_sem/task_4/examples 
+created directory: 3_sem/task_4/examples. File exists 
+
+file: 3_sem/task_4/examples/3_mutex_lock.c
+file type: 3_sem/task_4/examples/3_mutex_lock.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_4/examples/3_mutex_lock.c and backup/3_sem/task_4/examples/3_mutex_lock.c are identical
+
+file: 3_sem/task_4/examples/2_multithread_counting_nosync.c
+file type: 3_sem/task_4/examples/2_multithread_counting_nosync.c: C source, ASCII text
+file checked: Files 3_sem/task_4/examples/2_multithread_counting_nosync.c and backup/3_sem/task_4/examples/2_multithread_counting_nosync.c are identical
+
+file: 3_sem/task_4/examples/1_threads.c
+file type: 3_sem/task_4/examples/1_threads.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_4/examples/1_threads.c and backup/3_sem/task_4/examples/1_threads.c are identical
+
+file: 3_sem/task_4/examples/7_times.c
+file type: 3_sem/task_4/examples/7_times.c: C source, ASCII text
+file checked: Files 3_sem/task_4/examples/7_times.c and backup/3_sem/task_4/examples/7_times.c are identical
+
+file: 3_sem/task_4/examples/8_cond_timewait.c
+file type: 3_sem/task_4/examples/8_cond_timewait.c: C source, ASCII text
+file checked: Files 3_sem/task_4/examples/8_cond_timewait.c and backup/3_sem/task_4/examples/8_cond_timewait.c are identical
+
+file: 3_sem/task_4/examples/6_posix_cnt_sem.c
+file type: 3_sem/task_4/examples/6_posix_cnt_sem.c: C source, ASCII text
+file checked: Files 3_sem/task_4/examples/6_posix_cnt_sem.c and backup/3_sem/task_4/examples/6_posix_cnt_sem.c are identical
+
+directory: 3_sem/task_3
+attempt to mkdir: ./backup/3_sem/task_3 
+created directory: 3_sem/task_3. File exists 
+
+directory: 3_sem/task_3/nikitiuk
+attempt to mkdir: ./backup/3_sem/task_3/nikitiuk 
+created directory: 3_sem/task_3/nikitiuk. File exists 
+
+file: 3_sem/task_3/nikitiuk/input
+file type: 3_sem/task_3/nikitiuk/input: ASCII text
+file checked: Files 3_sem/task_3/nikitiuk/input and backup/3_sem/task_3/nikitiuk/input are identical
+
+file: 3_sem/task_3/nikitiuk/shm.c
+file type: 3_sem/task_3/nikitiuk/shm.c: C source, ASCII text
+file checked: Files 3_sem/task_3/nikitiuk/shm.c and backup/3_sem/task_3/nikitiuk/shm.c are identical
+
+file: 3_sem/task_3/nikitiuk/shm.out
+file type: 3_sem/task_3/nikitiuk/shm.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=183a37a3ab1673ec5bc474ccfc11243976082360, not stripped
+file: 3_sem/task_3/nikitiuk/msg.c
+file type: 3_sem/task_3/nikitiuk/msg.c: C source, ASCII text
+file checked: Files 3_sem/task_3/nikitiuk/msg.c and backup/3_sem/task_3/nikitiuk/msg.c are identical
+
+file: 3_sem/task_3/task.txt
+file type: 3_sem/task_3/task.txt: UTF-8 Unicode text, with very long lines
+file checked: Files 3_sem/task_3/task.txt and backup/3_sem/task_3/task.txt are identical
+
+directory: 3_sem/task_3/examples
+attempt to mkdir: ./backup/3_sem/task_3/examples 
+created directory: 3_sem/task_3/examples. File exists 
+
+file: 3_sem/task_3/examples/sender.c
+file type: 3_sem/task_3/examples/sender.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_3/examples/sender.c and backup/3_sem/task_3/examples/sender.c are identical
+
+file: 3_sem/task_3/examples/mmap_parent_child.c
+file type: 3_sem/task_3/examples/mmap_parent_child.c: C source, ASCII text
+file checked: Files 3_sem/task_3/examples/mmap_parent_child.c and backup/3_sem/task_3/examples/mmap_parent_child.c are identical
+
+file: 3_sem/task_3/examples/perror_simple.c
+file type: 3_sem/task_3/examples/perror_simple.c: C source, ASCII text
+file checked: Files 3_sem/task_3/examples/perror_simple.c and backup/3_sem/task_3/examples/perror_simple.c are identical
+
+file: 3_sem/task_3/examples/5_perror_fmt.c
+file type: 3_sem/task_3/examples/5_perror_fmt.c: C source, ASCII text
+file checked: Files 3_sem/task_3/examples/5_perror_fmt.c and backup/3_sem/task_3/examples/5_perror_fmt.c are identical
+
+file: 3_sem/task_3/examples/receiver.c
+file type: 3_sem/task_3/examples/receiver.c: C source, ASCII text
+file checked: Files 3_sem/task_3/examples/receiver.c and backup/3_sem/task_3/examples/receiver.c are identical
+
+file: 3_sem/task_3/ipc_disclaimer.txt
+file type: 3_sem/task_3/ipc_disclaimer.txt: UTF-8 Unicode text, with very long lines
+file checked: Files 3_sem/task_3/ipc_disclaimer.txt and backup/3_sem/task_3/ipc_disclaimer.txt are identical
+
+directory: 3_sem/task_5
+attempt to mkdir: ./backup/3_sem/task_5 
+created directory: 3_sem/task_5. File exists 
+
+file: 3_sem/task_5/task.c
+file type: 3_sem/task_5/task.c: UTF-8 Unicode text
+file checked: Files 3_sem/task_5/task.c and backup/3_sem/task_5/task.c are identical
+
+directory: 3_sem/task_5/examples
+attempt to mkdir: ./backup/3_sem/task_5/examples 
+created directory: 3_sem/task_5/examples. File exists 
+
+file: 3_sem/task_5/examples/2_nonblocking_wait_handler.c
+file type: 3_sem/task_5/examples/2_nonblocking_wait_handler.c: UTF-8 Unicode text
+file checked: Files 3_sem/task_5/examples/2_nonblocking_wait_handler.c and backup/3_sem/task_5/examples/2_nonblocking_wait_handler.c are identical
+
+file: 3_sem/task_5/examples/3_sigwait.c
+file type: 3_sem/task_5/examples/3_sigwait.c: C source, ASCII text
+file checked: Files 3_sem/task_5/examples/3_sigwait.c and backup/3_sem/task_5/examples/3_sigwait.c are identical
+
+file: 3_sem/task_5/examples/1_sigint_handler.c
+file type: 3_sem/task_5/examples/1_sigint_handler.c: C source, ASCII text
+file checked: Files 3_sem/task_5/examples/1_sigint_handler.c and backup/3_sem/task_5/examples/1_sigint_handler.c are identical
+
+file: 3_sem/task_5/examples/4_sigset_sigprocmask.c
+file type: 3_sem/task_5/examples/4_sigset_sigprocmask.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_5/examples/4_sigset_sigprocmask.c and backup/3_sem/task_5/examples/4_sigset_sigprocmask.c are identical
+
+directory: 3_sem/task_1
+attempt to mkdir: ./backup/3_sem/task_1 
+created directory: 3_sem/task_1. File exists 
+
+file: 3_sem/task_1/task1.txt
+file type: 3_sem/task_1/task1.txt: UTF-8 Unicode text
+file checked: Files 3_sem/task_1/task1.txt and backup/3_sem/task_1/task1.txt are identical
+
+directory: 3_sem/task_1/examples
+attempt to mkdir: ./backup/3_sem/task_1/examples 
+created directory: 3_sem/task_1/examples. File exists 
+
+file: 3_sem/task_1/examples/3_reap_zombies.c
+file type: 3_sem/task_1/examples/3_reap_zombies.c: C source, ASCII text
+file checked: Files 3_sem/task_1/examples/3_reap_zombies.c and backup/3_sem/task_1/examples/3_reap_zombies.c are identical
+
+file: 3_sem/task_1/examples/4_exec_dir
+file type: 3_sem/task_1/examples/4_exec_dir: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=5c114eb27acbc7d3c8253689de9572dda98935fe, not stripped
+file: 3_sem/task_1/examples/6_baseline_for_hw.c
+file type: 3_sem/task_1/examples/6_baseline_for_hw.c: C source, ASCII text
+file checked: Files 3_sem/task_1/examples/6_baseline_for_hw.c and backup/3_sem/task_1/examples/6_baseline_for_hw.c are identical
+
+file: 3_sem/task_1/examples/5_strtok
+file type: 3_sem/task_1/examples/5_strtok: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=94ad3a13c617877f334ead01f06a011d6b373c5a, not stripped
+file: 3_sem/task_1/examples/4_exec_dir.c
+file type: 3_sem/task_1/examples/4_exec_dir.c: C source, ASCII text
+file checked: Files 3_sem/task_1/examples/4_exec_dir.c and backup/3_sem/task_1/examples/4_exec_dir.c are identical
+
+file: 3_sem/task_1/examples/2_fork_wait_exit.c
+file type: 3_sem/task_1/examples/2_fork_wait_exit.c: C source, ASCII text
+file checked: Files 3_sem/task_1/examples/2_fork_wait_exit.c and backup/3_sem/task_1/examples/2_fork_wait_exit.c are identical
+
+file: 3_sem/task_1/examples/5_strtok.c
+file type: 3_sem/task_1/examples/5_strtok.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_1/examples/5_strtok.c and backup/3_sem/task_1/examples/5_strtok.c are identical
+
+directory: 3_sem/task_2
+attempt to mkdir: ./backup/3_sem/task_2 
+created directory: 3_sem/task_2. File exists 
+
+file: 3_sem/task_2/task.txt
+file type: 3_sem/task_2/task.txt: ASCII text
+file checked: Files 3_sem/task_2/task.txt and backup/3_sem/task_2/task.txt are identical
+
+directory: 3_sem/task_2/examples
+attempt to mkdir: ./backup/3_sem/task_2/examples 
+created directory: 3_sem/task_2/examples. File exists 
+
+file: 3_sem/task_2/examples/giga
+file type: 3_sem/task_2/examples/giga: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=2fc97176d8a6495a2fe0c230b95a1c7dc8233cd2, not stripped
+file: 3_sem/task_2/examples/3_fifo_writer.c
+file type: 3_sem/task_2/examples/3_fifo_writer.c: C source, ASCII text
+file checked: Files 3_sem/task_2/examples/3_fifo_writer.c and backup/3_sem/task_2/examples/3_fifo_writer.c are identical
+
+file: 3_sem/task_2/examples/3_fifo_reader.out
+file type: 3_sem/task_2/examples/3_fifo_reader.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=755d8edc463aa6937129d4f24049ff317473f346, not stripped
+file: 3_sem/task_2/examples/2_pipe.out
+file type: 3_sem/task_2/examples/2_pipe.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=0ea883c03780d044887e6b2940ec9b602ca29e5a, not stripped
+file: 3_sem/task_2/examples/pipe.c
+file type: 3_sem/task_2/examples/pipe.c: C source, ASCII text
+file checked: Files 3_sem/task_2/examples/pipe.c and backup/3_sem/task_2/examples/pipe.c are identical
+
+file: 3_sem/task_2/examples/pipe.out
+file type: 3_sem/task_2/examples/pipe.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=ca198dad66dcb95825eae2d313242e7608a03268, not stripped
+file: 3_sem/task_2/examples/3_fifo_reader.c
+file type: 3_sem/task_2/examples/3_fifo_reader.c: C source, ASCII text
+file checked: Files 3_sem/task_2/examples/3_fifo_reader.c and backup/3_sem/task_2/examples/3_fifo_reader.c are identical
+
+file: 3_sem/task_2/examples/1_touch.out
+file type: 3_sem/task_2/examples/1_touch.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=fd715fb82ff27b9fa5a3021117987b652526efc1, not stripped
+file: 3_sem/task_2/examples/1_touch.c
+file type: 3_sem/task_2/examples/1_touch.c: C source, ASCII text
+file checked: Files 3_sem/task_2/examples/1_touch.c and backup/3_sem/task_2/examples/1_touch.c are identical
+
+file: 3_sem/task_2/examples/3_fifo_writer.out
+file type: 3_sem/task_2/examples/3_fifo_writer.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=99a05bb9bd0839ea7fa43bee5a3b312cc8799035, not stripped
+file: 3_sem/task_2/examples/2_pipe.c
+file type: 3_sem/task_2/examples/2_pipe.c: C source, ASCII text
+file checked: Files 3_sem/task_2/examples/2_pipe.c and backup/3_sem/task_2/examples/2_pipe.c are identical
+
+directory: 3_sem/task_6
+attempt to mkdir: ./backup/3_sem/task_6 
+created directory: 3_sem/task_6. File exists 
+
+file: 3_sem/task_6/task.txt
+file type: 3_sem/task_6/task.txt: UTF-8 Unicode text
+file checked: Files 3_sem/task_6/task.txt and backup/3_sem/task_6/task.txt are identical
+
+directory: 3_sem/task_6/examples
+attempt to mkdir: ./backup/3_sem/task_6/examples 
+created directory: 3_sem/task_6/examples. File exists 
+
+file: 3_sem/task_6/examples/2_fs_symlink_mkdir.c
+file type: 3_sem/task_6/examples/2_fs_symlink_mkdir.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_6/examples/2_fs_symlink_mkdir.c and backup/3_sem/task_6/examples/2_fs_symlink_mkdir.c are identical
+
+file: 3_sem/task_6/examples/5_how_to_write_daemon.c
+file type: 3_sem/task_6/examples/5_how_to_write_daemon.c: UTF-8 Unicode text
+file checked: Files 3_sem/task_6/examples/5_how_to_write_daemon.c and backup/3_sem/task_6/examples/5_how_to_write_daemon.c are identical
+
+file: 3_sem/task_6/examples/4_get_diff_of_2_files.c
+file type: 3_sem/task_6/examples/4_get_diff_of_2_files.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_6/examples/4_get_diff_of_2_files.c and backup/3_sem/task_6/examples/4_get_diff_of_2_files.c are identical
+
+file: 3_sem/task_6/examples/3_recursive_print_regfiles.c
+file type: 3_sem/task_6/examples/3_recursive_print_regfiles.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_6/examples/3_recursive_print_regfiles.c and backup/3_sem/task_6/examples/3_recursive_print_regfiles.c are identical
+
+file: 3_sem/task_6/examples/1_non_blocking_wait.c
+file type: 3_sem/task_6/examples/1_non_blocking_wait.c: UTF-8 Unicode text
+file checked: Files 3_sem/task_6/examples/1_non_blocking_wait.c and backup/3_sem/task_6/examples/1_non_blocking_wait.c are identical
+
+file: 3_sem/task_6/disclaimer.txt
+file type: 3_sem/task_6/disclaimer.txt: UTF-8 Unicode text
+file checked: Files 3_sem/task_6/disclaimer.txt and backup/3_sem/task_6/disclaimer.txt are identical
+
+---------------------------------------------------------
+Mon Dec  2 18:40:53 2019
+
+directory: 3_sem/some stuff
+attempt to mkdir: ./backup/3_sem/some stuff 
+created directory: 3_sem/some stuff. File exists 
+
+file: 3_sem/some stuff/stuff
+file type: 3_sem/some stuff/stuff: ASCII text
+file checked: Files 3_sem/some stuff/stuff and backup/3_sem/some stuff/stuff differ
+
+backed up file: 3_sem/some stuff/stuff. File exists 
+time of copy: Mon Dec  2 18:40:53 2019
+
+directory: 3_sem/task_4
+attempt to mkdir: ./backup/3_sem/task_4 
+created directory: 3_sem/task_4. File exists 
+
+file: 3_sem/task_4/task.txt
+file type: 3_sem/task_4/task.txt: UTF-8 Unicode text
+file checked: Files 3_sem/task_4/task.txt and backup/3_sem/task_4/task.txt are identical
+
+directory: 3_sem/task_4/examples
+attempt to mkdir: ./backup/3_sem/task_4/examples 
+created directory: 3_sem/task_4/examples. File exists 
+
+file: 3_sem/task_4/examples/3_mutex_lock.c
+file type: 3_sem/task_4/examples/3_mutex_lock.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_4/examples/3_mutex_lock.c and backup/3_sem/task_4/examples/3_mutex_lock.c are identical
+
+file: 3_sem/task_4/examples/2_multithread_counting_nosync.c
+file type: 3_sem/task_4/examples/2_multithread_counting_nosync.c: C source, ASCII text
+file checked: Files 3_sem/task_4/examples/2_multithread_counting_nosync.c and backup/3_sem/task_4/examples/2_multithread_counting_nosync.c are identical
+
+file: 3_sem/task_4/examples/1_threads.c
+file type: 3_sem/task_4/examples/1_threads.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_4/examples/1_threads.c and backup/3_sem/task_4/examples/1_threads.c are identical
+
+file: 3_sem/task_4/examples/7_times.c
+file type: 3_sem/task_4/examples/7_times.c: C source, ASCII text
+file checked: Files 3_sem/task_4/examples/7_times.c and backup/3_sem/task_4/examples/7_times.c are identical
+
+file: 3_sem/task_4/examples/8_cond_timewait.c
+file type: 3_sem/task_4/examples/8_cond_timewait.c: C source, ASCII text
+file checked: Files 3_sem/task_4/examples/8_cond_timewait.c and backup/3_sem/task_4/examples/8_cond_timewait.c are identical
+
+file: 3_sem/task_4/examples/6_posix_cnt_sem.c
+file type: 3_sem/task_4/examples/6_posix_cnt_sem.c: C source, ASCII text
+file checked: Files 3_sem/task_4/examples/6_posix_cnt_sem.c and backup/3_sem/task_4/examples/6_posix_cnt_sem.c are identical
+
+directory: 3_sem/task_3
+attempt to mkdir: ./backup/3_sem/task_3 
+created directory: 3_sem/task_3. File exists 
+
+directory: 3_sem/task_3/nikitiuk
+attempt to mkdir: ./backup/3_sem/task_3/nikitiuk 
+created directory: 3_sem/task_3/nikitiuk. File exists 
+
+file: 3_sem/task_3/nikitiuk/input
+file type: 3_sem/task_3/nikitiuk/input: ASCII text
+file checked: Files 3_sem/task_3/nikitiuk/input and backup/3_sem/task_3/nikitiuk/input are identical
+
+file: 3_sem/task_3/nikitiuk/shm.c
+file type: 3_sem/task_3/nikitiuk/shm.c: C source, ASCII text
+file checked: Files 3_sem/task_3/nikitiuk/shm.c and backup/3_sem/task_3/nikitiuk/shm.c are identical
+
+file: 3_sem/task_3/nikitiuk/shm.out
+file type: 3_sem/task_3/nikitiuk/shm.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=183a37a3ab1673ec5bc474ccfc11243976082360, not stripped
+file: 3_sem/task_3/nikitiuk/msg.c
+file type: 3_sem/task_3/nikitiuk/msg.c: C source, ASCII text
+file checked: Files 3_sem/task_3/nikitiuk/msg.c and backup/3_sem/task_3/nikitiuk/msg.c are identical
+
+file: 3_sem/task_3/task.txt
+file type: 3_sem/task_3/task.txt: UTF-8 Unicode text, with very long lines
+file checked: Files 3_sem/task_3/task.txt and backup/3_sem/task_3/task.txt are identical
+
+directory: 3_sem/task_3/examples
+attempt to mkdir: ./backup/3_sem/task_3/examples 
+created directory: 3_sem/task_3/examples. File exists 
+
+file: 3_sem/task_3/examples/sender.c
+file type: 3_sem/task_3/examples/sender.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_3/examples/sender.c and backup/3_sem/task_3/examples/sender.c are identical
+
+file: 3_sem/task_3/examples/mmap_parent_child.c
+file type: 3_sem/task_3/examples/mmap_parent_child.c: C source, ASCII text
+file checked: Files 3_sem/task_3/examples/mmap_parent_child.c and backup/3_sem/task_3/examples/mmap_parent_child.c are identical
+
+file: 3_sem/task_3/examples/perror_simple.c
+file type: 3_sem/task_3/examples/perror_simple.c: C source, ASCII text
+file checked: Files 3_sem/task_3/examples/perror_simple.c and backup/3_sem/task_3/examples/perror_simple.c are identical
+
+file: 3_sem/task_3/examples/5_perror_fmt.c
+file type: 3_sem/task_3/examples/5_perror_fmt.c: C source, ASCII text
+file checked: Files 3_sem/task_3/examples/5_perror_fmt.c and backup/3_sem/task_3/examples/5_perror_fmt.c are identical
+
+file: 3_sem/task_3/examples/receiver.c
+file type: 3_sem/task_3/examples/receiver.c: C source, ASCII text
+file checked: Files 3_sem/task_3/examples/receiver.c and backup/3_sem/task_3/examples/receiver.c are identical
+
+file: 3_sem/task_3/ipc_disclaimer.txt
+file type: 3_sem/task_3/ipc_disclaimer.txt: UTF-8 Unicode text, with very long lines
+file checked: Files 3_sem/task_3/ipc_disclaimer.txt and backup/3_sem/task_3/ipc_disclaimer.txt are identical
+
+directory: 3_sem/task_5
+attempt to mkdir: ./backup/3_sem/task_5 
+created directory: 3_sem/task_5. File exists 
+
+file: 3_sem/task_5/task.c
+file type: 3_sem/task_5/task.c: UTF-8 Unicode text
+file checked: Files 3_sem/task_5/task.c and backup/3_sem/task_5/task.c are identical
+
+directory: 3_sem/task_5/examples
+attempt to mkdir: ./backup/3_sem/task_5/examples 
+created directory: 3_sem/task_5/examples. File exists 
+
+file: 3_sem/task_5/examples/2_nonblocking_wait_handler.c
+file type: 3_sem/task_5/examples/2_nonblocking_wait_handler.c: UTF-8 Unicode text
+file checked: Files 3_sem/task_5/examples/2_nonblocking_wait_handler.c and backup/3_sem/task_5/examples/2_nonblocking_wait_handler.c are identical
+
+file: 3_sem/task_5/examples/3_sigwait.c
+file type: 3_sem/task_5/examples/3_sigwait.c: C source, ASCII text
+file checked: Files 3_sem/task_5/examples/3_sigwait.c and backup/3_sem/task_5/examples/3_sigwait.c are identical
+
+file: 3_sem/task_5/examples/1_sigint_handler.c
+file type: 3_sem/task_5/examples/1_sigint_handler.c: C source, ASCII text
+file checked: Files 3_sem/task_5/examples/1_sigint_handler.c and backup/3_sem/task_5/examples/1_sigint_handler.c are identical
+
+file: 3_sem/task_5/examples/4_sigset_sigprocmask.c
+file type: 3_sem/task_5/examples/4_sigset_sigprocmask.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_5/examples/4_sigset_sigprocmask.c and backup/3_sem/task_5/examples/4_sigset_sigprocmask.c are identical
+
+directory: 3_sem/task_1
+attempt to mkdir: ./backup/3_sem/task_1 
+created directory: 3_sem/task_1. File exists 
+
+file: 3_sem/task_1/task1.txt
+file type: 3_sem/task_1/task1.txt: UTF-8 Unicode text
+file checked: Files 3_sem/task_1/task1.txt and backup/3_sem/task_1/task1.txt are identical
+
+directory: 3_sem/task_1/examples
+attempt to mkdir: ./backup/3_sem/task_1/examples 
+created directory: 3_sem/task_1/examples. File exists 
+
+file: 3_sem/task_1/examples/3_reap_zombies.c
+file type: 3_sem/task_1/examples/3_reap_zombies.c: C source, ASCII text
+file checked: Files 3_sem/task_1/examples/3_reap_zombies.c and backup/3_sem/task_1/examples/3_reap_zombies.c are identical
+
+file: 3_sem/task_1/examples/4_exec_dir
+file type: 3_sem/task_1/examples/4_exec_dir: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=5c114eb27acbc7d3c8253689de9572dda98935fe, not stripped
+file: 3_sem/task_1/examples/6_baseline_for_hw.c
+file type: 3_sem/task_1/examples/6_baseline_for_hw.c: C source, ASCII text
+file checked: Files 3_sem/task_1/examples/6_baseline_for_hw.c and backup/3_sem/task_1/examples/6_baseline_for_hw.c are identical
+
+file: 3_sem/task_1/examples/5_strtok
+file type: 3_sem/task_1/examples/5_strtok: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=94ad3a13c617877f334ead01f06a011d6b373c5a, not stripped
+file: 3_sem/task_1/examples/4_exec_dir.c
+file type: 3_sem/task_1/examples/4_exec_dir.c: C source, ASCII text
+file checked: Files 3_sem/task_1/examples/4_exec_dir.c and backup/3_sem/task_1/examples/4_exec_dir.c are identical
+
+file: 3_sem/task_1/examples/2_fork_wait_exit.c
+file type: 3_sem/task_1/examples/2_fork_wait_exit.c: C source, ASCII text
+file checked: Files 3_sem/task_1/examples/2_fork_wait_exit.c and backup/3_sem/task_1/examples/2_fork_wait_exit.c are identical
+
+file: 3_sem/task_1/examples/5_strtok.c
+file type: 3_sem/task_1/examples/5_strtok.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_1/examples/5_strtok.c and backup/3_sem/task_1/examples/5_strtok.c are identical
+
+directory: 3_sem/task_2
+attempt to mkdir: ./backup/3_sem/task_2 
+created directory: 3_sem/task_2. File exists 
+
+file: 3_sem/task_2/task.txt
+file type: 3_sem/task_2/task.txt: ASCII text
+file checked: Files 3_sem/task_2/task.txt and backup/3_sem/task_2/task.txt are identical
+
+directory: 3_sem/task_2/examples
+attempt to mkdir: ./backup/3_sem/task_2/examples 
+created directory: 3_sem/task_2/examples. File exists 
+
+file: 3_sem/task_2/examples/giga
+file type: 3_sem/task_2/examples/giga: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=2fc97176d8a6495a2fe0c230b95a1c7dc8233cd2, not stripped
+file: 3_sem/task_2/examples/3_fifo_writer.c
+file type: 3_sem/task_2/examples/3_fifo_writer.c: C source, ASCII text
+file checked: Files 3_sem/task_2/examples/3_fifo_writer.c and backup/3_sem/task_2/examples/3_fifo_writer.c are identical
+
+file: 3_sem/task_2/examples/3_fifo_reader.out
+file type: 3_sem/task_2/examples/3_fifo_reader.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=755d8edc463aa6937129d4f24049ff317473f346, not stripped
+file: 3_sem/task_2/examples/2_pipe.out
+file type: 3_sem/task_2/examples/2_pipe.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=0ea883c03780d044887e6b2940ec9b602ca29e5a, not stripped
+file: 3_sem/task_2/examples/pipe.c
+file type: 3_sem/task_2/examples/pipe.c: C source, ASCII text
+file checked: Files 3_sem/task_2/examples/pipe.c and backup/3_sem/task_2/examples/pipe.c are identical
+
+file: 3_sem/task_2/examples/pipe.out
+file type: 3_sem/task_2/examples/pipe.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=ca198dad66dcb95825eae2d313242e7608a03268, not stripped
+file: 3_sem/task_2/examples/3_fifo_reader.c
+file type: 3_sem/task_2/examples/3_fifo_reader.c: C source, ASCII text
+file checked: Files 3_sem/task_2/examples/3_fifo_reader.c and backup/3_sem/task_2/examples/3_fifo_reader.c are identical
+
+file: 3_sem/task_2/examples/1_touch.out
+file type: 3_sem/task_2/examples/1_touch.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=fd715fb82ff27b9fa5a3021117987b652526efc1, not stripped
+file: 3_sem/task_2/examples/1_touch.c
+file type: 3_sem/task_2/examples/1_touch.c: C source, ASCII text
+file checked: Files 3_sem/task_2/examples/1_touch.c and backup/3_sem/task_2/examples/1_touch.c are identical
+
+file: 3_sem/task_2/examples/3_fifo_writer.out
+file type: 3_sem/task_2/examples/3_fifo_writer.out: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/l, for GNU/Linux 3.2.0, BuildID[sha1]=99a05bb9bd0839ea7fa43bee5a3b312cc8799035, not stripped
+file: 3_sem/task_2/examples/2_pipe.c
+file type: 3_sem/task_2/examples/2_pipe.c: C source, ASCII text
+file checked: Files 3_sem/task_2/examples/2_pipe.c and backup/3_sem/task_2/examples/2_pipe.c are identical
+
+directory: 3_sem/task_6
+attempt to mkdir: ./backup/3_sem/task_6 
+created directory: 3_sem/task_6. File exists 
+
+file: 3_sem/task_6/task.txt
+file type: 3_sem/task_6/task.txt: UTF-8 Unicode text
+file checked: Files 3_sem/task_6/task.txt and backup/3_sem/task_6/task.txt are identical
+
+directory: 3_sem/task_6/examples
+attempt to mkdir: ./backup/3_sem/task_6/examples 
+created directory: 3_sem/task_6/examples. File exists 
+
+file: 3_sem/task_6/examples/2_fs_symlink_mkdir.c
+file type: 3_sem/task_6/examples/2_fs_symlink_mkdir.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_6/examples/2_fs_symlink_mkdir.c and backup/3_sem/task_6/examples/2_fs_symlink_mkdir.c are identical
+
+file: 3_sem/task_6/examples/5_how_to_write_daemon.c
+file type: 3_sem/task_6/examples/5_how_to_write_daemon.c: UTF-8 Unicode text
+file checked: Files 3_sem/task_6/examples/5_how_to_write_daemon.c and backup/3_sem/task_6/examples/5_how_to_write_daemon.c are identical
+
+file: 3_sem/task_6/examples/4_get_diff_of_2_files.c
+file type: 3_sem/task_6/examples/4_get_diff_of_2_files.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_6/examples/4_get_diff_of_2_files.c and backup/3_sem/task_6/examples/4_get_diff_of_2_files.c are identical
+
+file: 3_sem/task_6/examples/3_recursive_print_regfiles.c
+file type: 3_sem/task_6/examples/3_recursive_print_regfiles.c: C source, UTF-8 Unicode text
+file checked: Files 3_sem/task_6/examples/3_recursive_print_regfiles.c and backup/3_sem/task_6/examples/3_recursive_print_regfiles.c are identical
+
+file: 3_sem/task_6/examples/1_non_blocking_wait.c
+file type: 3_sem/task_6/examples/1_non_blocking_wait.c: UTF-8 Unicode text
+file checked: Files 3_sem/task_6/examples/1_non_blocking_wait.c and backup/3_sem/task_6/examples/1_non_blocking_wait.c are identical
+
+file: 3_sem/task_6/disclaimer.txt
+file type: 3_sem/task_6/disclaimer.txt: UTF-8 Unicode text
+file checked: Files 3_sem/task_6/disclaimer.txt and backup/3_sem/task_6/disclaimer.txt are identical
+
