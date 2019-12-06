@@ -1,18 +1,17 @@
 #include <errno.h>
 #include <fcntl.h>
-#include <semaphore.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/ipc.h>
-#include <sys/shm.h>
+#include <sys/msg.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <time.h>
 #include <unistd.h>
 
-const int SIZE = 4096;
+#define SIZE 1024
 #define DATA_SIZE 1000000000
 
 long long get_time() // Returns current time in microseconds
@@ -31,21 +30,23 @@ int minimum(int a, int b)
         return a;
 }
 
+typedef struct {
+    long mtype;
+    char mtext[SIZE];
+} message_buf;
+
 int main(int argc, char* argv[])
 {
-    key_t key = ftok("shm.c", 128);
+    key_t key = ftok("msg.c", 128);
 
     pid_t pid = fork();
 
-    sem_t* sem[2];
-    sem[0] = sem_open("semaphore", O_CREAT, 0666, 0);
-    sem[1] = sem_open("another_semaphore", O_CREAT, 0666, 0);
+		int msqid = msgget(key, IPC_CREAT | 0666);
+		message_buf buffer;
+		buffer.mtype = 10;
 
     if (pid != 0)
     {
-        int shmid = shmget(key, SIZE + 1, IPC_CREAT | 0666);
-        char* buffer = shmat(shmid, NULL, 0);
-
         int input = open("enwik9", O_RDONLY);
         char* data = malloc(DATA_SIZE);
         read(input, data, DATA_SIZE);
@@ -53,45 +54,36 @@ int main(int argc, char* argv[])
 
         long long start = get_time();
         FILE* log = fopen("data.csv", "a");
-        fprintf(log, "shm,%d,%lld", SIZE, start); // Add data to log file
+        fprintf(log, "msg,%d,%lld", SIZE, start); // Add data to log file
         fclose(log);
 
         for (int done = 0; done < DATA_SIZE; done += SIZE)
         {
-            memcpy(buffer, &data[done], minimum(DATA_SIZE - done, SIZE));
-            sem_post(sem[0]);
-            sem_wait(sem[1]);
+            memcpy(buffer.mtext, &data[done], minimum(DATA_SIZE - done, SIZE));
+            msgsnd(msqid, &buffer, SIZE, 0);
         }
-        shmdt(buffer);
         free(data);
     }
     else
     {
-        int shmid = shmget(key, SIZE + 1, IPC_CREAT | 0666);
-        char* buffer = shmat(shmid, NULL, 0);
-
         int output = open("output", O_WRONLY | O_CREAT, 0644);
         char* data = malloc(DATA_SIZE);
 
         for (int done = 0; done < DATA_SIZE; done += SIZE)
         {
-            sem_wait(sem[0]);
-            memcpy(&data[done], buffer, minimum(DATA_SIZE - done, SIZE));
-            sem_post(sem[1]);
+					msgrcv(msqid, &buffer, SIZE, 10, MSG_NOERROR);
+					//For whatever reason reading minimum(...) instead of SIZE was causing
+					// one message to be left in queue. MSG_NOERROR just cuts out the useless part
+					memcpy(&data[done], buffer.mtext, minimum(DATA_SIZE - done, SIZE));
         }
         long long end = get_time();
         FILE* log = fopen("data.csv", "a");
         fprintf(log, ",%lld\n", end); // Add data to log file
         fclose(log);
-        // printf("%s\n", data);
-
         write(output, data, DATA_SIZE);
         close(output);
         free(data);
-        shmdt(buffer);
     }
-    sem_close(sem[0]);
-    sem_close(sem[1]);
 
     return 0;
 }

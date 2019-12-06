@@ -1,11 +1,9 @@
 #include <errno.h>
 #include <fcntl.h>
-#include <semaphore.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/ipc.h>
-#include <sys/shm.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -33,18 +31,12 @@ int minimum(int a, int b)
 
 int main(int argc, char* argv[])
 {
-    key_t key = ftok("shm.c", 128);
-
+    mknod("fifo", S_IFIFO|0666, 0);
     pid_t pid = fork();
-
-    sem_t* sem[2];
-    sem[0] = sem_open("semaphore", O_CREAT, 0666, 0);
-    sem[1] = sem_open("another_semaphore", O_CREAT, 0666, 0);
 
     if (pid != 0)
     {
-        int shmid = shmget(key, SIZE + 1, IPC_CREAT | 0666);
-        char* buffer = shmat(shmid, NULL, 0);
+        int buffer = open("fifo", O_WRONLY);
 
         int input = open("enwik9", O_RDONLY);
         char* data = malloc(DATA_SIZE);
@@ -53,45 +45,35 @@ int main(int argc, char* argv[])
 
         long long start = get_time();
         FILE* log = fopen("data.csv", "a");
-        fprintf(log, "shm,%d,%lld", SIZE, start); // Add data to log file
+        fprintf(log, "fifo,%d,%lld", SIZE, start); // Add data to log file
         fclose(log);
 
         for (int done = 0; done < DATA_SIZE; done += SIZE)
         {
-            memcpy(buffer, &data[done], minimum(DATA_SIZE - done, SIZE));
-            sem_post(sem[0]);
-            sem_wait(sem[1]);
+            write(buffer, &data[done], minimum(DATA_SIZE - done, SIZE));
         }
-        shmdt(buffer);
         free(data);
     }
     else
     {
-        int shmid = shmget(key, SIZE + 1, IPC_CREAT | 0666);
-        char* buffer = shmat(shmid, NULL, 0);
+        int buffer = open("fifo", O_RDONLY);
 
         int output = open("output", O_WRONLY | O_CREAT, 0644);
         char* data = malloc(DATA_SIZE);
 
         for (int done = 0; done < DATA_SIZE; done += SIZE)
         {
-            sem_wait(sem[0]);
-            memcpy(&data[done], buffer, minimum(DATA_SIZE - done, SIZE));
-            sem_post(sem[1]);
+            read(buffer, &data[done], minimum(DATA_SIZE - done, SIZE));
         }
         long long end = get_time();
         FILE* log = fopen("data.csv", "a");
         fprintf(log, ",%lld\n", end); // Add data to log file
         fclose(log);
-        // printf("%s\n", data);
 
         write(output, data, DATA_SIZE);
         close(output);
         free(data);
-        shmdt(buffer);
     }
-    sem_close(sem[0]);
-    sem_close(sem[1]);
 
     return 0;
 }
