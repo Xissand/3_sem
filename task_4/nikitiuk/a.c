@@ -20,7 +20,7 @@ typedef struct {    // Information about each threads interval for integration
     double minY;    // Minimum value of integrand
     double maxY;    // Maximum value of integrand
     int dots;       // Number of throws for the thread
-    int id;
+    int id;         // Id of the thread
 } interval;
 
 volatile double integral[16384]; // Value of integral
@@ -93,10 +93,10 @@ int main(int argc, char const* argv[])
 
     /*"генерируя в каждом из них N/n точек равномерно по интервалу" could be interpreted in a couple of ways:
      Each thread generates points in the entire interval or interval is split between threads
-     I believe splitting the interval guarantees more evenly distributed points. However, I could be wrong */
-    /*This is supported by comparison in deviation of results from analytical between 1 computatinal thread and 512
-    threads. Larger amount of threads allows for finer bounds for Y value, which allows to throw points closer to the
-    integrand's curve increasing precision.*/
+     I believe splitting the interval guarantees more evenly distributed points. However, I could be wrong
+     This is supported by comparison in deviation of results from analytical between 1 computatinal thread and 512
+     threads. Larger amount of threads allows for finer bounds for Y value, which allows to throw points closer to the
+     integrand's curve increasing precision.*/
 
     interval a[THREADS_COUNT];
     for (int i = 0; i < THREADS_COUNT; i++) // Initialize each threads interval
@@ -131,8 +131,8 @@ int main(int argc, char const* argv[])
     printf("Correct result: 1.29759\n"); // From WolframAlpha
     printf("Computation took: %lld\n", execution_time);
 
-    FILE* log = fopen("data.log", "a");
-    fprintf(log, "%d %lld\n", THREADS_COUNT, execution_time); // Add data to log file
+    FILE* log = fopen("data.csv", "a");
+    fprintf(log, "%d,%lld\n", THREADS_COUNT, execution_time); // Add data to log file
     fclose(log);
     return 0;
 }
