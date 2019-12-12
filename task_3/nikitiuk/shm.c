@@ -12,8 +12,8 @@
 #include <time.h>
 #include <unistd.h>
 
-const int SIZE = 4096;
-#define DATA_SIZE 1000000000
+const int SIZE = 524288;
+const int DATA_SIZE = 1000000000;
 
 long long get_time() // Returns current time in microseconds
 {
@@ -33,7 +33,7 @@ int minimum(int a, int b)
 
 int main(int argc, char* argv[])
 {
-    key_t key = ftok("shm.c", 128);
+    key_t key = ftok("enwik9", 128);
 
     pid_t pid = fork();
 
@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
 
     if (pid != 0)
     {
-        int shmid = shmget(key, SIZE + 1, IPC_CREAT | 0666);
+        int shmid = shmget(key, SIZE + 1, IPC_CREAT | 0666 | SHM_HUGETLB);
         char* buffer = shmat(shmid, NULL, 0);
 
         int input = open("enwik9", O_RDONLY);
@@ -67,7 +67,7 @@ int main(int argc, char* argv[])
     }
     else
     {
-        int shmid = shmget(key, SIZE + 1, IPC_CREAT | 0666);
+        int shmid = shmget(key, SIZE + 1, IPC_CREAT | 0666 | SHM_HUGETLB);
         char* buffer = shmat(shmid, NULL, 0);
 
         int output = open("output", O_WRONLY | O_CREAT, 0644);
@@ -92,6 +92,8 @@ int main(int argc, char* argv[])
     }
     sem_close(sem[0]);
     sem_close(sem[1]);
+    sem_unlink("semaphore");
+    sem_unlink("another_semaphore");
 
     return 0;
 }

@@ -11,7 +11,7 @@
 #include <time.h>
 #include <unistd.h>
 
-#define SIZE 1024
+#define SIZE 8192
 #define DATA_SIZE 1000000000
 
 long long get_time() // Returns current time in microseconds

@@ -10,7 +10,7 @@
 #include <time.h>
 #include <unistd.h>
 
-const int SIZE = 4096;
+const int SIZE = 536870912;
 #define DATA_SIZE 1000000000
 
 long long get_time() // Returns current time in microseconds
