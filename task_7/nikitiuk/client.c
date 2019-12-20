@@ -39,13 +39,15 @@ int main()
     sprintf(comms, "%d.tx", rand());
     sprintf(files, "%d.rx", rand());
 
+    // strcpy(comms, "comms.tx");
+
     sprintf(buffer, "REGISTER %s %s", comms, files);
 
     mknod(comms, S_IFIFO | 0666, 0);
     mknod(files, S_IFIFO | 0666, 0);
 
     write(reg, buffer, sizeof(buffer));
-    sleep(1);
+    usleep(100);
     /*read(reg, buffer, sizeof(buffer));
 
     if (strcmp(buffer, "ACK"))
@@ -56,23 +58,31 @@ int main()
 
     int commands = open(comms, O_WRONLY);
     int transfer = open(files, O_RDONLY);
+    close(reg);
 
     int sz = 0;
 
     while (1)
     {
         printf("Input filename: ");
-        read(0, buffer, sizeof(buffer));
+        fgets(buffer, sizeof(buffer), stdin);
         // buffer[sizeof(buffer)-1]=NULL;
-        printf("Reqesting file: %s\n", buffer);
 
-        sprintf(buffer, "GET %s", buffer);
-        write(commands, buffer, sizeof(buffer));
+        char command[SZ];
+        // buffer[sizeof(buffer)-2] = '\0';
+        sprintf(command, "GET %s", buffer);
 
-        while ((sz = read(transfer, buffer, sizeof(buffer))) > 0)
+        printf("Reqesting file via: %s\n", command);
+        write(commands, command, sizeof(command));
+
+        int resp;
+        read(transfer, &resp, sizeof(resp));
+        printf("%d\n", resp);
+
+        /*while ((sz = read(transfer, buffer, sizeof(buffer))) > 0)
         {
-            write(1, buffer, sz);
-        }
+            printf("%s\n", buffer);
+        }*/
         printf("File transfer ended.\n");
     }
     return 0;

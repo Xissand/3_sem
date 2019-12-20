@@ -20,17 +20,23 @@
 
 typedef struct {
     int channel;
-    char filename;
+    char filename[SZ];
 } task;
+
+typedef struct {
+    int path_commands; // fd
+    int path_file;     // fd
+    char name_file[SZ];
+} client;
 
 int schedule[TASKS_MAX];
 task tasks[TASKS_MAX];
 
 void post_task(int client_channel, char client_filename[SZ])
 {
-    task new;
+    task new = {};
     new.channel = client_channel;
-    memcpy(&new.filename, &client_filename, SZ*sizeof(char));
+    strcpy(new.filename, client_filename);
 
     for (size_t i = 0; i < TASKS_MAX; i++)
     {
@@ -38,19 +44,14 @@ void post_task(int client_channel, char client_filename[SZ])
         {
             schedule[i] = 1;
             memcpy(&tasks[i], &new, sizeof(new));
-            printf("%d\n", tasks[i].channel);
-            printf("%c\n", tasks[i].filename);
+            // printf("%d\n", tasks[i].channel);
+            // printf("task with filename:%s\n", tasks[i].filename);
             return;
         }
-        printf("We are at capacity, kindly fuck off");
+        if (i == (TASKS_MAX - 1))
+            printf("We are at capacity, kindly fuck off");
     }
 }
-
-typedef struct {
-    int path_commands; // fd
-    int path_file;     // fd
-    char name_file[SZ];
-} client;
 
 void* server_routine(void* args)
 {
@@ -63,11 +64,16 @@ void* server_routine(void* args)
         {
             if (schedule[i])
             {
+                printf("server thread %d responding\n", id);
                 int channel = tasks[i].channel;
                 char name[SZ];
-                memcpy(&name, &tasks[i].filename, SZ*sizeof(char));
+                memcpy(&name, &tasks[i].filename, SZ * sizeof(char));
 
-                write(channel, "HUI", sizeof("HUI"));
+                int resp = rand();
+                write(channel, &resp, sizeof(int));
+                sleep(5); // to show of the glorious scheduler
+                schedule[i] = 0;
+
                 break;
             }
         }
@@ -97,7 +103,7 @@ int main()
     struct pollfd fds[CLIENTS_MAX + 1]; // 64 clients and control fifo
 
     system("rm registry");
-    //system("rm *.tx *.rx");
+    // system("rm *.tx *.rx");
     mknod("registry", S_IFIFO | 0666, 0);
     int reg = open("registry", O_RDWR);
     fds[0].fd = reg;
@@ -108,8 +114,9 @@ int main()
     memset(schedule, 0, sizeof(schedule));
 
     int ids[THREADS_NUM];
-    for (size_t i = 0; i < THREADS_NUM; i++) {
-      ids[i] = i;
+    for (size_t i = 0; i < THREADS_NUM; i++)
+    {
+        ids[i] = i;
     }
 
     pthread_t thread[THREADS_NUM];
@@ -121,7 +128,7 @@ int main()
     while (1)
     {
         errno = 0;
-        int poll_ret = poll(fds, 1, tv);
+        int poll_ret = poll(fds, client_counter, tv);
         if (poll_ret == 0)
             perror("Timeout");
         else
@@ -129,8 +136,10 @@ int main()
             memset(buf, 0, sizeof(buf));
             for (size_t i = 0; i < client_counter; i++)
             {
+                // printf("%zu out of %d open fifos\n", i, client_counter);
                 if (fds[i].revents & POLLIN)
                 {
+                    // printf("STUFF\n");
                     read_ret = read(fds[i].fd, buf, sizeof(buf));
                     if (i == 0)
                     {
@@ -140,20 +149,23 @@ int main()
                             printf("the fuck goes on: %s\n", args[0]);
                             continue;
                         }
-                        printf("%s\n", args[1]);
-                        printf("%s\n", args[2]);
+                        printf("command fifo over at: %s\n", args[1]);
+                        printf("data fifo over at: %s\n", args[2]);
 
                         int client_comms = open(args[1], O_RDWR);
-                        int client_transfer = open(args[2], O_RDWR);
-
+                        // perror("comms");
+                        int client_transfer = open(args[2], O_WRONLY);
+                        // perror("trans");
                         clients[client_counter].path_commands = client_comms;
                         clients[client_counter].path_file = client_transfer;
 
                         fds[client_counter].fd = client_comms;
-                        fds[client_counter].events = 0 | POLLIN;
-
-                        //write(reg, "ACK", sizeof("ACK"));
+                        fds[client_counter].events = 0 | POLLIN | POLLHUP;
+                        fds[client_counter].revents = 0;
+                        // write(reg, "ACK", sizeof("ACK"));
                         client_counter++;
+                        fds[i].revents = 0;
+                        // fgetc(stdin);
                     }
                     else
                     {
@@ -164,9 +176,9 @@ int main()
                             printf("the fuck goes on but in a different way\n");
                             continue;
                         }
-                        printf("%s\n", args[1]);
+                        printf("requested file: %s\n", args[1]);
 
-                        memcpy(clients[client_counter].name_file, args[1], sizeof(&args[1]));
+                        strcpy(clients[i].name_file, args[1]);
                         post_task(clients[i].path_file, clients[i].name_file);
                     }
                 }
