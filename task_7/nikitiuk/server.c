@@ -13,7 +13,7 @@
 #include "sys/types.h"
 #include "unistd.h"
 
-#define SZ 4096
+#define SZ 256
 #define CLIENTS_MAX 64
 #define TASKS_MAX 128
 #define THREADS_NUM 4
@@ -26,11 +26,11 @@ typedef struct {
 int schedule[TASKS_MAX];
 task tasks[TASKS_MAX];
 
-void post_task(int client_channel, char client_filename[PATH_MAX])
+void post_task(int client_channel, char client_filename[SZ])
 {
-    task new = {};
+    task new;
     new.channel = client_channel;
-    memcpy(&new.filename, &client_filename, PATH_MAX*sizeof(char));
+    memcpy(&new.filename, &client_filename, SZ*sizeof(char));
 
     for (size_t i = 0; i < TASKS_MAX; i++)
     {
@@ -49,12 +49,13 @@ void post_task(int client_channel, char client_filename[PATH_MAX])
 typedef struct {
     int path_commands; // fd
     int path_file;     // fd
-    char name_file[PATH_MAX];
+    char name_file[SZ];
 } client;
 
 void* server_routine(void* args)
 {
-    int id = (int) args;
+    int id = *(int*) args;
+    printf("server thread %d initialized\n", id);
 
     while (1)
     {
@@ -63,8 +64,8 @@ void* server_routine(void* args)
             if (schedule[i])
             {
                 int channel = tasks[i].channel;
-                char name[PATH_MAX];
-                memcpy(&name, &tasks[i].filename, PATH_MAX*sizeof(char));
+                char name[SZ];
+                memcpy(&name, &tasks[i].filename, SZ*sizeof(char));
 
                 write(channel, "HUI", sizeof("HUI"));
                 break;
@@ -77,7 +78,7 @@ char** parse_register(char* data)
 {
     int counter = 0;
     char delim[] = " \n";
-    char** list = (char**) malloc(PATH_MAX * sizeof(char*));
+    char** list = (char**) malloc(SZ * sizeof(char*));
     for (char* p = strtok(data, delim); p != NULL; p = strtok(NULL, delim))
     {
         list[counter] = p;
@@ -95,6 +96,8 @@ int main()
     int tv = 30000;
     struct pollfd fds[CLIENTS_MAX + 1]; // 64 clients and control fifo
 
+    system("rm registry");
+    //system("rm *.tx *.rx");
     mknod("registry", S_IFIFO | 0666, 0);
     int reg = open("registry", O_RDWR);
     fds[0].fd = reg;
@@ -113,25 +116,28 @@ int main()
     for (int i = 0; i < THREADS_NUM; i++)
         pthread_create(&thread[i], NULL, server_routine, &ids[i]);
 
+    printf("server waiting for connection\n");
+
     while (1)
     {
+        errno = 0;
         int poll_ret = poll(fds, 1, tv);
         if (poll_ret == 0)
             perror("Timeout");
         else
         {
             memset(buf, 0, sizeof(buf));
-            for (size_t i = 0; i < CLIENTS_MAX + 1; i++)
+            for (size_t i = 0; i < client_counter; i++)
             {
                 if (fds[i].revents & POLLIN)
                 {
-                    read_ret = read(fd, buf, sizeof(buf));
+                    read_ret = read(fds[i].fd, buf, sizeof(buf));
                     if (i == 0)
                     {
                         char** args = parse_register(buf);
                         if (strcmp(args[0], "REGISTER"))
                         {
-                            printf("the fuck goes on\n");
+                            printf("the fuck goes on: %s\n", args[0]);
                             continue;
                         }
                         printf("%s\n", args[1]);
@@ -146,7 +152,7 @@ int main()
                         fds[client_counter].fd = client_comms;
                         fds[client_counter].events = 0 | POLLIN;
 
-                        write(reg, "ACK", sizeof("ACK"));
+                        //write(reg, "ACK", sizeof("ACK"));
                         client_counter++;
                     }
                     else

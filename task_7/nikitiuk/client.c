@@ -10,6 +10,8 @@
 #include "sys/types.h"
 #include "unistd.h"
 
+#define SZ 256
+
 long long get_time() // Returns current time in microseconds
 {
     struct timeval time;
@@ -28,9 +30,9 @@ int main()
         return 0;
     }
 
-    char comms[PATH_MAX];
-    char files[PATH_MAX];
-    char buffer[3 * PATH_MAX];
+    char comms[SZ];
+    char files[SZ];
+    char buffer[SZ];
 
     srand(get_time());
 
@@ -43,14 +45,14 @@ int main()
     mknod(files, S_IFIFO | 0666, 0);
 
     write(reg, buffer, sizeof(buffer));
-    sleep(5);
-    read(reg, buffer, sizeof(buffer));
+    sleep(1);
+    /*read(reg, buffer, sizeof(buffer));
 
     if (strcmp(buffer, "ACK"))
     {
         printf("Invalid responce from server: %s\n", buffer);
         return 0;
-    }
+    }*/
 
     int commands = open(comms, O_WRONLY);
     int transfer = open(files, O_RDONLY);
