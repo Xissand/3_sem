@@ -21,7 +21,7 @@
 
 #define BACKLOG 10 // how many pending connections queue will hold
 
-#define THREADS_COUNT 1 // computing threads in each child
+#define THREADS_COUNT 512 // computing threads in each child
 
 void sigchld_handler(int s)
 {
@@ -134,16 +134,33 @@ int main(void)
         {                  // this is the child process
             close(sockfd); // child doesn't need the listener
 
-            interval a;
+            interval a0;
             pthread_t thread[THREADS_COUNT];
 
-            for (size_t i = 0; i < THREADS_COUNT; i++) {
-              integral[i] = 0;
+            for (size_t i = 0; i < THREADS_COUNT; i++)
+            {
+                integral[i] = 0;
             }
 
-            recv(new_fd, &a, sizeof(interval), 0);
+            recv(new_fd, &a0, sizeof(interval), 0);
 
-            a.id = 0;
+            // a.id = 0;
+
+            double STARTX = a0.startX;
+            double length_per_thread = a0.lengthX / THREADS_COUNT;
+            double dots_per_thread = a0.dots / THREADS_COUNT;
+
+            interval a[THREADS_COUNT];
+            for (int i = 0; i < THREADS_COUNT; i++) // Initialize each threads interval
+            {
+                a[i].startX = STARTX + i * length_per_thread;
+                a[i].lengthX = length_per_thread;
+                a[i].minY = a0.minY;
+                a[i].maxY = a0.maxY;
+                a[i].dots = dots_per_thread;
+                a[i].id = i;
+            }
+
             // start to compute
 
             for (size_t i = 0; i < THREADS_COUNT; i++)
@@ -155,7 +172,7 @@ int main(void)
 
             // Create threads
             for (int i = 0; i < THREADS_COUNT; i++)
-                pthread_create(&thread[i], NULL, thread_routine, &a);
+                pthread_create(&thread[i], NULL, thread_routine, &a[i]);
             for (int i = 0; i < THREADS_COUNT; i++)
                 pthread_join(thread[i], NULL);
 
